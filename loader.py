@@ -1,17 +1,22 @@
 # loader.py
+import os
 import requests
 from bs4 import BeautifulSoup
+from dotenv import load_dotenv
 from pinecone import Pinecone
 from sentence_transformers import SentenceTransformer
 import re
 
+load_dotenv()
+
 # --- CONFIGURATION ---
-# Paste your keys and environment here from Step 1
-PINECONE_API_KEY = "pcsk_5WTRYR_NV3Y7iESfP8CedPRB1CsB6gN5w4sAxC2XtQzLuWpgGPxzcnfJ6A7YwPLZCFTt4V"
-PINECONE_ENVIRONMENT = "us-east-1"
+# Read credentials from the environment (.env locally, or the host's secret store)
+# instead of committing them to the repository.
+PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
+PINECONE_ENVIRONMENT = os.getenv("PINECONE_ENVIRONMENT", "us-east-1")
 INDEX_NAME = "chatbot"
 # The starting URL for your website. The scraper will follow links from here.
-BASE_URL = "https://life.minescout.net" 
+BASE_URL = "https://life.minescout.net"
 
 # --- 1. INITIALIZE CONNECTIONS ---
 print("🚀 Initializing connections...")
